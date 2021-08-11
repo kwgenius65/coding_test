@@ -1,0 +1,63 @@
+<!-- 증가 감소 숫자 처리 02 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+        window.onload = function() {
+            var increaseBtn = document.getElementById("increaseBtn");
+            var inputBox = document.getElementById("inputBox");
+            var decreaseBtn = document.getElementById("decreaseBtn");
+            var isMousePress = false;
+            var doFuntion = function (index) {
+                if (isMousePress) {
+                    var result = Number(inputBox.value) + index;
+                    if (result > 0 && result < 10000000) {
+                        inputBox.value = result;
+
+                        // 재귀 호출
+                        setTimeout(function(){
+                            doFuntion(index);
+                        }, 200);
+                    } else {
+                        isMousePress = false;
+                    }
+                }
+            };
+
+            increaseBtn.addEventListener("mousedown", function (e){
+                isMousePress = true;
+                doFuntion(1);
+            });
+
+            increaseBtn.addEventListener("mouseup", function (e) {
+                isMousePress = false;
+            });
+
+            increaseBtn.addEventListener("mouseout", function (e) {
+                isMousePress = false;
+            });
+
+            decreaseBtn.addEventListener("mousedown", function (e){
+                isMousePress = true;
+                doFuntion(-1);
+            });
+
+            decreaseBtn.addEventListener("mouseup", function (e) {
+                isMousePress = false;
+            });
+
+            decreaseBtn.addEventListener("mouseout", function (e) {
+                isMousePress = false;
+            });
+
+        }
+        </script>
+    </head>
+    <body>
+        <button id="increaseBtn">+</button>
+        <!-- <input type="button" value="+" id="increaseBtn"></input> -->
+        <input type="number" id="inputBox" placeholder="0" min="1" max="10000000"></input>
+        <button id="decreaseBtn">-</button>
+        <!-- <input type="button" value="-" id="decreaseBtn"></input> -->
+    </body>
+</html>
